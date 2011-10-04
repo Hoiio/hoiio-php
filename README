@@ -1,0 +1,51 @@
+
+php-hoiio 
+----------------------
+
+php-hoiio is a PHP SDK for Hoiio's Voice and SMS API. It encapsulates the REST 
+communications and let developers use the API via a few simple classes.
+
+Currently, php-hoiio supports the Call, SMS, Account, Hoiio Number and IVR APIs.
+
+
+Requirements
+----------------------
+- PHP 5 >= 5.1
+- PHP JSON extension
+- PHP cURL extension
+
+
+Installation
+----------------------
+Just download and extract the package into your project folder. You should be
+able to see a php-hoiio/ folder.
+
+
+Usage
+----------------------
+You will be able to access all of Hoiio's API via the HoiioService class. 
+Check the docs for details.
+
+/********* Example code ************/
+require 'php-hoiio/Services/HoiioService.php'
+
+$h = new HoiioService("myAppID", "myAccessToken");
+$txnRef = $h->sms("+651111111", "hello world");
+print("SMS sent successfully. TxnRef: $txnRef\n");
+
+
+License
+----------------------
+This project is under MIT License (http://en.wikipedia.org/wiki/MIT_License).
+See LICENSE file for details.
+
+
+Contacts
+----------------------
+If you have any questions, please feel free to contact us:
+
+Twitter:		@hoiiotweets
+Google Groups:	https://groups.google.com/forum/#!forum/hoiio-developers
+Facebook:		http://www.facebook.com/Hoiio
+Blog:			http://devblog.hoiio.com/
+
