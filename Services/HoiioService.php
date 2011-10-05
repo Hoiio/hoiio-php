@@ -171,5 +171,104 @@ class HoiioService {
     public function parseSMSNotify($post_vars) {
         return SMSService::parseSMSNotify($post_var);
     }
+
+
+    /***********************************
+    * IVR-related methods
+    ***********************************/
+
+    /**
+     * Use this to dial out to a number to start a IVR session.
+     *
+     * @param string $to        Destination number to dial to
+     * @param string $notifyURL Your URL to recieve IVR notification
+     * @param string $msg       The voice message you want to play
+     * @param string $callerID  The Caller ID you want to use for this call
+     * @param string $tag       Your own reference ID
+     *
+     * @return array            Return associative array with keys 'session' and 'txnRef'
+     * @throws HoiioException   Error sending IVR Dial to Hoiio API
+     */
+    public function ivrDial($to, $notifyURL, $msg = '', $callerID = '', $tag = '') {
+        return IVRService::dial($this->appID, $this->accessToken, $to, $notifyURL, $msg, $callerID, $tag);
+    }
+
+    /**
+     * Use this to play a voice message in your IVR session.
+     *
+     * @param string $session   Session ID for this IVR
+     * @param string $notifyURL Your URL to recieve IVR notification
+     * @param string $msg       The voice message you want to play
+     * @param string $tag       Your own reference ID
+     *
+     * @return bool             Always return true
+     * @throws HoiioException   Error sending IVR Play to Hoiio API
+     */
+    public function ivrPlay($session, $notifyURL, $msg = '', $tag = '') {
+        return IVRService::play($this->appID, $this->accessToken, $session, $notifyURL, $msg, $tag);
+    }
+
+    /**
+     * Use this to gather keypad input from user in your IVR session.
+     *
+     * @param string $session   Session ID for this IVR
+     * @param string $notifyURL Your URL to recieve IVR notification
+     * @param string $msg       The voice message you want to play
+     * @param string $maxDigits Maximum number of user input
+     * @param string $timeout   Maximum time allowed for user to enter their input
+     * @param string $attempts  How many times the user is allowed to input
+     * @param string $tag       Your own reference ID
+     *
+     * @return bool             Always return true
+     * @throws HoiioException   Error sending IVR Gather to Hoiio API
+     */
+    public function ivrGather($session, $notifyURL, $msg = '', $maxDigits = 0, $timeout = 15, $attempts = 1, $tag = '') {
+        return IVRService::gather($this->appID, $this->accessToken, $session, $notifyURL, $msg,
+                                    $maxDigits, $timeout, $attempts, $tag);
+    }
+
+    /**
+     * Use this to transfer a current IVR session to another number.
+     *
+     * @param string $session   Session ID for this IVR
+     * @param string $to        Destination number to transfer to
+     * @param string $notifyURL Your URL to recieve IVR notification
+     * @param string $msg       The voice message you want to play before transferring
+     * @param string $callerID  The Caller ID you want to use when transferring the call
+     * @param string $tag       Your own reference ID
+     *
+     * @return bool             Always return true
+     * @throws HoiioException   Error sending IVR Transfer to Hoiio API
+     */
+    public function ivrTransfer($session, $to, $notifyURL, $msg = '', $callerID = '', $tag = '') {
+        return IVRService::transfer($this->appID, $this->accessToken, $session, $to, $notifyURL, $msg, $callerID, $tag);
+    }
+
+    /**
+    * Use this to hang up the current IVR session.
+    *
+    * @param string $session    Session ID for this IVR
+    * @param string $notifyURL  Your URL to recieve IVR notification
+    * @param string $msg        The voice message you want to play before hanging up
+    * @param string $tag        Your own reference ID
+    *
+    * @return bool              Always return true
+    * @throws HoiioException    Error sending IVR Hangup to Hoiio API
+    */
+    public function ivrHangup($session, $notifyURL, $msg = '', $tag = '') {
+        return IVRService::hangup($this->appID, $this->accessToken, $session, $notifyURL, $msg, $tag);
+    }
+
+
+    /**
+     * Parse the IVR notifications sent to you.
+     *
+     * @param array $post_vars  Pass in the system variable $_POST
+     *
+     * @return IVRNotification  Look at IVRNotification for available information
+     */
+    public function parseIVRNotify($post_vars) {
+        return IVRService::parseIVRNotify($post_vars);
+    }
 }
 
