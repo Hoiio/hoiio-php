@@ -143,6 +143,7 @@ class IVRService extends HTTPService {
         $transferStatus = array_key_exists('transfer_status', $post_var) ? $post_var['transfer_status'] : '';
         $from = array_key_exists('from', $post_var) ? $post_var['from'] : '';
         $to = array_key_exists('to', $post_var) ? $post_var['to'] : '';
+        $dest = array_key_exists('dest', $post_var) ? $post_var['dest'] : '';
 
         $date = array_key_exists('date', $post_var) ? $post_var['date'] : '';
         $currency = array_key_exists('currency', $post_var) ? $post_var['currency'] : '';
@@ -160,6 +161,7 @@ class IVRService extends HTTPService {
                                        $transferStatus,
                                        $from,
                                        $to,
+                                       $dest,
                                        $date,
                                        $currency,
                                        $rate,

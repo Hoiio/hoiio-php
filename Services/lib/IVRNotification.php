@@ -16,6 +16,7 @@ class IVRNotification {
 
     // params for specific blocks like Dial, Gather, Transfer
     private $dialStatus = '';        // Dial block
+    private $dest = '';              // Dial block
     private $digits = '';            // Gather block
     private $transferStatus = '';    // Transfer block
     private $from = '';              // Answer block
@@ -114,6 +115,15 @@ class IVRNotification {
     }
 
     /**
+    * The destination number when using a Dial block.
+    *
+    * @return string   Destination Number (Dial block)
+    */
+    public function getDest() {
+        return $this->dest;
+    }
+
+    /**
      * The keypad input from the user after using the Gather block.
      *
      * @return string   Keypad input from user (Gather block)
@@ -152,7 +162,7 @@ class IVRNotification {
 
     public function __construct($callState, $session, $txnRef,
                                     $dialStatus = '', $digits = '', $transferStatus = '',
-                                    $from = '', $to = '',
+                                    $from = '', $to = '', $dest = '',
                                     $date = '', $currency = '', $rate = 0, $duration = 0, $debit = 0,
                                     $tag = '') {
         $this->callState = $callState;
@@ -165,6 +175,7 @@ class IVRNotification {
         $this->transferStatus = $transferStatus;
         $this->from = $from;
         $this->to = $to;
+        $this->dest = $dest;
 
         $this->date = $date;
         $this->duration = $duration;
@@ -172,6 +183,4 @@ class IVRNotification {
         $this->rate = $rate;
         $this->debit = $debit;
     }
-
-
 }
