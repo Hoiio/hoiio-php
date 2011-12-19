@@ -189,7 +189,7 @@ class HoiioService {
      * @return array            Return associative array with keys 'session' and 'txnRef'
      * @throws HoiioException   Error sending IVR Dial to Hoiio API
      */
-    public function ivrDial($to, $notifyURL, $msg = '', $callerID = '', $tag = '') {
+    public function ivrDial($to, $notifyURL = '', $msg = '', $callerID = '', $tag = '') {
         return IVRService::dial($this->appID, $this->accessToken, $to, $notifyURL, $msg, $callerID, $tag);
     }
 
@@ -204,7 +204,7 @@ class HoiioService {
      * @return bool             Always return true
      * @throws HoiioException   Error sending IVR Play to Hoiio API
      */
-    public function ivrPlay($session, $notifyURL, $msg = '', $tag = '') {
+    public function ivrPlay($session, $notifyURL = '', $msg = '', $tag = '') {
         return IVRService::play($this->appID, $this->accessToken, $session, $notifyURL, $msg, $tag);
     }
 
@@ -240,7 +240,7 @@ class HoiioService {
      * @return bool             Always return true
      * @throws HoiioException   Error sending IVR Transfer to Hoiio API
      */
-    public function ivrTransfer($session, $to, $notifyURL, $msg = '', $callerID = '', $tag = '') {
+    public function ivrTransfer($session, $to, $notifyURL = '', $msg = '', $callerID = '', $tag = '') {
         return IVRService::transfer($this->appID, $this->accessToken, $session, $to, $notifyURL, $msg, $callerID, $tag);
     }
 
@@ -255,7 +255,7 @@ class HoiioService {
     * @return bool              Always return true
     * @throws HoiioException    Error sending IVR Hangup to Hoiio API
     */
-    public function ivrHangup($session, $notifyURL, $msg = '', $tag = '') {
+    public function ivrHangup($session, $notifyURL = '', $msg = '', $tag = '') {
         return IVRService::hangup($this->appID, $this->accessToken, $session, $notifyURL, $msg, $tag);
     }
 

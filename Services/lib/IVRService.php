@@ -18,12 +18,11 @@ class IVRService extends HTTPService {
     const I_TRANSFER    = 'https://secure.hoiio.com/open/ivr/end/transfer';
     const I_HANGUP      = 'https://secure.hoiio.com/open/ivr/end/hangup';
 
-    public static function dial($appID, $accessToken, $to, $notifyURL, $msg = '', $callerID = '', $tag = '') {
+    public static function dial($appID, $accessToken, $to, $notifyURL = '', $msg = '', $callerID = '', $tag = '') {
         // prepare HTTP POST variables
         $fields = array(    'app_id' => urlencode($appID),
                             'access_token' => urlencode($accessToken),
-                            'dest' => urlencode($to),
-                            'notify_url' => urlencode($notifyURL)
+                            'dest' => urlencode($to)
         );
 
         if($msg != '')
@@ -35,18 +34,20 @@ class IVRService extends HTTPService {
         if($tag != '')
             $fields['tag'] = urlencode($tag);
 
+        if($notifyURL != '')
+            $fields['notify_url'] = urlencode($notifyURL);
+
         // do the actual post to Hoiio servers
         $result = self::doHoiioPost(self::I_DIAL, $fields);
 
         return array('session' => $result->{'session'}, 'txnRef' => $result->{'txn_ref'});
     }
 
-    public static function play($appID, $accessToken, $session, $notifyURL, $msg = '', $tag = '') {
+    public static function play($appID, $accessToken, $session, $notifyURL = '', $msg = '', $tag = '') {
         // prepare HTTP POST variables
         $fields = array(    'app_id' => urlencode($appID),
                             'access_token' => urlencode($accessToken),
-                            'session' => urlencode($session),
-                            'notify_url' => urlencode($notifyURL)
+                            'session' => urlencode($session)
         );
 
         if($msg != '')
@@ -54,6 +55,9 @@ class IVRService extends HTTPService {
 
         if($tag != '')
             $fields['tag'] = urlencode($tag);
+
+        if($notifyURL != '')
+            $fields['notify_url'] = urlencode($notifyURL);
 
         // do the actual post to Hoiio servers
         $result = self::doHoiioPost(self::I_PLAY, $fields);
@@ -85,13 +89,12 @@ class IVRService extends HTTPService {
         return true;
     }
 
-    public static function transfer($appID, $accessToken, $session, $to, $notifyURL, $msg = '', $callerID = '', $tag = '') {
+    public static function transfer($appID, $accessToken, $session, $to, $notifyURL = '', $msg = '', $callerID = '', $tag = '') {
         // prepare HTTP POST variables
         $fields = array(    'app_id' => urlencode($appID),
                             'access_token' => urlencode($accessToken),
                             'session' => urlencode($session),
-                            'dest' => urlencode($to),
-                            'notify_url' => urlencode($notifyURL)
+                            'dest' => urlencode($to)
         );
 
         if($msg != '')
@@ -103,18 +106,20 @@ class IVRService extends HTTPService {
         if($tag != '')
             $fields['tag'] = urlencode($tag);
 
+        if($notifyURL != '')
+            $fields['notify_url'] = urlencode($notifyURL);
+
         // do the actual post to Hoiio servers
         $result = self::doHoiioPost(self::I_TRANSFER, $fields);
 
         return true;
     }
 
-    public static function hangup($appID, $accessToken, $session, $notifyURL, $msg = '', $tag = '') {
+    public static function hangup($appID, $accessToken, $session, $notifyURL = '', $msg = '', $tag = '') {
         // prepare HTTP POST variables
         $fields = array(    'app_id' => urlencode($appID),
                             'access_token' => urlencode($accessToken),
-                            'session' => urlencode($session),
-                            'notify_url' => urlencode($notifyURL)
+                            'session' => urlencode($session)
         );
 
         if($msg != '')
@@ -122,6 +127,9 @@ class IVRService extends HTTPService {
 
         if($tag != '')
             $fields['tag'] = urlencode($tag);
+
+        if($notifyURL != '')
+            $fields['notify_url'] = urlencode($notifyURL);
 
         // do the actual post to Hoiio servers
         $result = self::doHoiioPost(self::I_HANGUP, $fields);
