@@ -20,7 +20,8 @@ class IVRService extends HTTPService {
 
     public static function dial($appID, $accessToken, $to, $notifyURL = '', $msg = '', $callerID = '', $tag = '') {
         // prepare HTTP POST variables
-        $fields = array(    'app_id' => urlencode($appID),
+        $fields = array(
+                            'app_id' => urlencode($appID),
                             'access_token' => urlencode($accessToken),
                             'dest' => urlencode($to)
         );
@@ -45,7 +46,8 @@ class IVRService extends HTTPService {
 
     public static function play($appID, $accessToken, $session, $notifyURL = '', $msg = '', $tag = '') {
         // prepare HTTP POST variables
-        $fields = array(    'app_id' => urlencode($appID),
+        $fields = array(
+                            'app_id' => urlencode($appID),
                             'access_token' => urlencode($accessToken),
                             'session' => urlencode($session)
         );
@@ -68,7 +70,8 @@ class IVRService extends HTTPService {
     public static function gather($appID, $accessToken, $session, $notifyURL, $msg = '',
                                     $maxDigits = 0, $timeout = 15, $attempts = 1, $tag = '') {
         // prepare HTTP POST variables
-        $fields = array(    'app_id' => urlencode($appID),
+        $fields = array(
+                            'app_id' => urlencode($appID),
                             'access_token' => urlencode($accessToken),
                             'session' => urlencode($session),
                             'notify_url' => urlencode($notifyURL),
@@ -91,7 +94,8 @@ class IVRService extends HTTPService {
 
     public static function transfer($appID, $accessToken, $session, $to, $notifyURL = '', $msg = '', $callerID = '', $tag = '') {
         // prepare HTTP POST variables
-        $fields = array(    'app_id' => urlencode($appID),
+        $fields = array(
+                            'app_id' => urlencode($appID),
                             'access_token' => urlencode($accessToken),
                             'session' => urlencode($session),
                             'dest' => urlencode($to)
@@ -120,7 +124,8 @@ class IVRService extends HTTPService {
 
     public static function hangup($appID, $accessToken, $session, $notifyURL = '', $msg = '', $tag = '') {
         // prepare HTTP POST variables
-        $fields = array(    'app_id' => urlencode($appID),
+        $fields = array(
+                            'app_id' => urlencode($appID),
                             'access_token' => urlencode($accessToken),
                             'session' => urlencode($session)
         );

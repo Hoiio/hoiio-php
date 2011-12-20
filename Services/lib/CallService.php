@@ -104,9 +104,9 @@ class CallService extends HTTPService {
     public static function conference($appID, $accessToken, $dest, $room = '', $callerID = '', $tag = '', $notifyURL = '') {
         // prepare HTTP POST variables
         $fields = array(
-							'app_id' => urlencode($appID),
-							'access_token' => urlencode($accessToken),
-							'dest' => urlencode(implode(',', $dest))
+                            'app_id' => urlencode($appID),
+                            'access_token' => urlencode($accessToken),
+                            'dest' => urlencode(implode(',', $dest))
         );
 
         if($room != '')
@@ -136,9 +136,9 @@ class CallService extends HTTPService {
     public static function hangup($appID, $accessToken, $txnRef) {
         // prepare HTTP POST variables
         $fields = array(
-							'app_id' => urlencode($appID),
-        					'access_token' => urlencode($accessToken),
-        					'txn_ref' => urlencode($txnRef)
+                            'app_id' => urlencode($appID),
+                            'access_token' => urlencode($accessToken),
+                            'txn_ref' => urlencode($txnRef)
         );
 
         // do the actual post to Hoiio servers
@@ -163,5 +163,3 @@ class CallService extends HTTPService {
                                     $tag);
     }
 }
-
-
