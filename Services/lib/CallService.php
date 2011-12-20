@@ -16,6 +16,7 @@ class CallService extends HTTPService {
     const H_CALL_RATE   = 'https://secure.hoiio.com/open/voice/get_rate';
     const H_CALL_STATUS = 'https://secure.hoiio.com/open/voice/query_status';
     const H_CALL_CONF   = 'https://secure.hoiio.com/open/voice/conference';
+    const H_CALL_HANGUP = 'https://secure.hoiio.com/open/voice/hangup';
 
     public static function call($appID, $accessToken, $from, $to, $callerID = '', $tag = '', $notifyURL = '') {
         // prepare HTTP POST variables
@@ -130,6 +131,20 @@ class CallService extends HTTPService {
             array_push($members, new ConferenceMember($jsonEntries[$i], $dest[$i]));
 
         return new ConferenceRoom($result->{'room'}, $members);
+    }
+
+    public static function hangup($appID, $accessToken, $txnRef) {
+        // prepare HTTP POST variables
+        $fields = array(
+							'app_id' => urlencode($appID),
+        					'access_token' => urlencode($accessToken),
+        					'txn_ref' => urlencode($txnRef)
+        );
+
+        // do the actual post to Hoiio servers
+        $result = self::doHoiioPost(self::H_CALL_HANGUP, $fields);
+
+        return true;
     }
 
     public static function parseCallNotify($post_var) {

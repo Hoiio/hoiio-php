@@ -99,6 +99,18 @@ class HoiioService {
     }
 
     /**
+     * Use this to hang up a call that is currently in progress.
+     *
+     * @param array  $txnRef    Transaction Reference
+     *
+     * @return bool   			Always return true
+     * @throws HoiioException   Error sending call to Hoiio API
+     */
+    public function hangup($txnRef) {
+        return CallService::hangup($this->appID, $this->accessToken, $txnRef);
+    }
+
+    /**
      * Parse the call notifications sent to you when the call ends. Multiple
      * notifications may be recieved over time.
      *

@@ -49,6 +49,10 @@ class HoiioException extends Exception {
     const MSG_INVALID_LANGUAGE          = 'error_msg_invalid_language';
     const MSG_INVALID_GENDER            = 'error_msg_invalid_gender';
     const MSG_INVALID_XML               = 'error_msg_invalid_xml';
+    const MSG_DOWNLOAD_FAIL             = 'error_msg_download_failed';
+    const MSG_INVALID_FILE_FORMAT       = 'error_msg_invalid_file_format';
+    const MSG_INVALID_FILE_SIZE         = 'error_msg_invalid_file_size';
+    const MSG_INVALID_URL               = 'error_msg_invalid_url';
     const SESSION_ACCESS_DENIED         = 'error_session_access_denied';
     const CALLER_ID_INVALID             = 'error_caller_id_invalid';
     const INVALID_MAX_DIGITS            = 'error_invalid_max_digits';
