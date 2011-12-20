@@ -112,7 +112,10 @@ class IVRService extends HTTPService {
         // do the actual post to Hoiio servers
         $result = self::doHoiioPost(self::I_TRANSFER, $fields);
 
-        return true;
+        if(array_key_exists('room', $result))
+            return $result->{'room'};
+        else
+            return true;
     }
 
     public static function hangup($appID, $accessToken, $session, $notifyURL = '', $msg = '', $tag = '') {

@@ -27,14 +27,14 @@ You will be able to access all of Hoiio's API via the HoiioService class.
 Check the docs for details.
 
 // E.g. Sending SMS
-require 'php-hoiio/Services/HoiioService.php'
+require 'php-hoiio/Services/HoiioService.php';
 
 $h = new HoiioService("myAppID", "myAccessToken");
 $txnRef = $h->sms("+651111111", "hello world");
 print("SMS sent successfully. TxnRef: $txnRef\n");
 
 // E.g. Building IVR
-require 'php-hoiio/Services/HoiioService.php'
+require 'php-hoiio/Services/HoiioService.php';
 
 $h = new HoiioService("myAppID", "myAccessToken");
 $notify = $h->parseIVRNotify($_POST);

@@ -15,8 +15,9 @@ class CallService extends HTTPService {
     const H_CALL_HIST   = 'https://secure.hoiio.com/open/voice/get_history';
     const H_CALL_RATE   = 'https://secure.hoiio.com/open/voice/get_rate';
     const H_CALL_STATUS = 'https://secure.hoiio.com/open/voice/query_status';
+    const H_CALL_CONF   = 'https://secure.hoiio.com/open/voice/conference';
 
-    public static function call($appID, $accessToken, $from, $to, $tag = '', $notifyURL = '') {
+    public static function call($appID, $accessToken, $from, $to, $callerID = '', $tag = '', $notifyURL = '') {
         // prepare HTTP POST variables
         $fields = array(
                             'app_id' => urlencode($appID),
@@ -24,6 +25,9 @@ class CallService extends HTTPService {
                             'dest1' => urlencode($from),
                             'dest2' => urlencode($to)
         );
+
+        if($callerID != '')
+            $fields['caller_id'] = urlencode($callerID);
 
         if($tag != '')
             $fields['tag'] = urlencode($tag);
@@ -94,6 +98,38 @@ class CallService extends HTTPService {
         return new TransactionHistory($result->{'total_entries_count'}, $result->{'entries_count'}, $transactions,
                                         $resultFrom, $resultTo, $page);
 
+    }
+
+    public static function conference($appID, $accessToken, $dest, $room = '', $callerID = '', $tag = '', $notifyURL = '') {
+        // prepare HTTP POST variables
+        $fields = array(
+							'app_id' => urlencode($appID),
+							'access_token' => urlencode($accessToken),
+							'dest' => urlencode(implode(',', $dest))
+        );
+
+        if($room != '')
+            $fields['room'] = urlencode($room);
+
+        if($callerID != '')
+            $fields['caller_id'] = urlencode($callerID);
+
+        if($tag != '')
+            $fields['tag'] = urlencode($tag);
+
+        if($notifyURL != '')
+            $fields['notify_url'] = urlencode($notifyURL);
+
+        // do the actual post to Hoiio servers
+        $result = self::doHoiioPost(self::H_CALL_CONF, $fields);
+
+        // parse result into ConferenceMember objects
+        $members = array();
+        $jsonEntries = explode(",", $result->{'txn_refs'});
+        for($i=0;$i < count($dest);$i++)
+            array_push($members, new ConferenceMember($jsonEntries[$i], $dest[$i]));
+
+        return new ConferenceRoom($result->{'room'}, $members);
     }
 
     public static function parseCallNotify($post_var) {

@@ -84,6 +84,21 @@ class HoiioService {
     }
 
     /**
+     * Use this to make a conference call.
+     *
+     * @param array  $dest      Array of destination number strings
+     * @param string $room      Conference Room ID
+     * @param string $tag       Your own reference ID
+     * @param string $notifyURL Your URL to recieve call notification
+     *
+     * @return ConferenceRoom   Look at ConferenceRoom for available information
+     * @throws HoiioException   Error sending call to Hoiio API
+     */
+    public function conference($dest, $room = '', $tag = '', $notifyURL = '') {
+        return CallService::conference($this->appID, $this->accessToken, $dest, $room, $tag, $notifyURL);
+    }
+
+    /**
      * Parse the call notifications sent to you when the call ends. Multiple
      * notifications may be recieved over time.
      *
@@ -94,7 +109,6 @@ class HoiioService {
     public function parseCallNotify($post_vars) {
         return CallService::parseCallNotify($post_var);
     }
-
 
     /***********************************
      * SMS-related methods
@@ -228,7 +242,7 @@ class HoiioService {
     }
 
     /**
-     * Use this to transfer a current IVR session to another number.
+     * Use this to transfer a current IVR session to another number or a conference room.
      *
      * @param string $session   Session ID for this IVR
      * @param string $to        Destination number to transfer to
@@ -237,7 +251,7 @@ class HoiioService {
      * @param string $callerID  The Caller ID you want to use when transferring the call
      * @param string $tag       Your own reference ID
      *
-     * @return bool             Always return true
+     * @return bool/string      Always return true (when transferring to E.164 number). Return Room ID when transferring to conference room.
      * @throws HoiioException   Error sending IVR Transfer to Hoiio API
      */
     public function ivrTransfer($session, $to, $notifyURL = '', $msg = '', $callerID = '', $tag = '') {
