@@ -94,7 +94,7 @@ class IVRService extends HTTPService {
         return true;
     }
 
-    public static function record($appID, $accessToken, $session, $notifyURL, $msg = '', $maxDuration = 120) {
+    public static function record($appID, $accessToken, $session, $notifyURL, $msg = '', $maxDuration = 120, $tag = '') {
         // prepare HTTP POST variables
         $fields = array(
                             'app_id' => urlencode($appID),

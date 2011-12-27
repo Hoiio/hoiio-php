@@ -254,6 +254,22 @@ class HoiioService {
     }
 
     /**
+     * Use this to record voice message over the phone from user in your IVR session.
+     *
+     * @param string $session       Session ID for this IVR
+     * @param string $notifyURL     Your URL to recieve IVR notification
+     * @param string $msg           The voice message you want to play
+     * @param string $maxDuration   Maximum duration of the recording in seconds
+     * @param string $tag           Your own reference ID
+     *
+     * @return bool             Always return true
+     * @throws HoiioException   Error sending IVR Record to Hoiio API
+     */
+    public function ivrRecord($session, $notifyURL, $msg = '', $maxDuration = 120, $tag = '') {
+        return IVRService::record($this->appID, $this->accessToken, $session, $notifyURL, $msg, $maxDuration, $tag);
+    }
+
+    /**
      * Use this to transfer a current IVR session to another number or a conference room.
      *
      * @param string $session   Session ID for this IVR
