@@ -58,6 +58,7 @@ class HoiioException extends Exception {
     const INVALID_MAX_DIGITS            = 'error_invalid_max_digits';
     const INVALID_TIMEOUT               = 'error_invalid_timeout';
     const INVALID_ATTEMPTS              = 'error_invalid_attempts';
+    const INVALID_MAX_DURATION          = 'error_invalid_max_duration';
 
     protected $status = '';
 

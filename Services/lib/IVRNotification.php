@@ -18,6 +18,7 @@ class IVRNotification {
     private $dialStatus = '';        // Dial block
     private $dest = '';              // Dial block
     private $digits = '';            // Gather block
+    private $recordURL = '';         // Record block
     private $transferStatus = '';    // Transfer block
     private $from = '';              // Answer block
     private $to = '';                // Answer block
@@ -133,6 +134,15 @@ class IVRNotification {
     }
 
     /**
+     * The URL of the recording after using the Record block.
+     *
+     * @return string   URL of recording (Record block)
+     */
+    public function getRecordURL() {
+        return $this->recordURL;
+    }
+
+    /**
      * The transfer status of the number after using a Transfer block.
      * Look at CallStatus class for possible values.
      *
@@ -152,16 +162,16 @@ class IVRNotification {
     }
 
     /**
-    * The Hoiio Number that was dialed for incoming call.
-    *
-    * @return string    Dialed Hoiio Number (Answer block)
-    */
+     * The Hoiio Number that was dialed for incoming call.
+     *
+     * @return string    Dialed Hoiio Number (Answer block)
+     */
     public function getTo() {
         return $this->to;
     }
 
     public function __construct($callState, $session, $txnRef,
-                                    $dialStatus = '', $digits = '', $transferStatus = '',
+                                    $dialStatus = '', $digits = '', $recordURL = '', $transferStatus = '',
                                     $from = '', $to = '', $dest = '',
                                     $date = '', $currency = '', $rate = 0, $duration = 0, $debit = 0,
                                     $tag = '') {
@@ -172,6 +182,7 @@ class IVRNotification {
 
         $this->dialStatus = $dialStatus;
         $this->digits = $digits;
+        $this->recordURL = $recordURL;
         $this->transferStatus = $transferStatus;
         $this->from = $from;
         $this->to = $to;

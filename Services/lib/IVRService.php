@@ -1,20 +1,22 @@
 <?php
 
 /**
-* IVRService class provides acccess to IVR-related Hoiio API.
-* Currently, includes:
-*  - Answer
-*  - Dial
-*  - Play
-*  - Gather
-*  - Transfer
-*  - Hangup
-*/
+ * IVRService class provides acccess to IVR-related Hoiio API.
+ * Currently, includes:
+ *  - Answer
+ *  - Dial
+ *  - Play
+ *  - Gather
+ *  - Record
+ *  - Transfer
+ *  - Hangup
+ */
 class IVRService extends HTTPService {
     /* endpoints for IVR APIs */
     const I_DIAL        = 'https://secure.hoiio.com/open/ivr/start/dial';
     const I_PLAY        = 'https://secure.hoiio.com/open/ivr/middle/play';
     const I_GATHER      = 'https://secure.hoiio.com/open/ivr/middle/gather';
+    const I_RECORD      = 'https://secure.hoiio.com/open/ivr/middle/record';
     const I_TRANSFER    = 'https://secure.hoiio.com/open/ivr/end/transfer';
     const I_HANGUP      = 'https://secure.hoiio.com/open/ivr/end/hangup';
 
@@ -92,6 +94,28 @@ class IVRService extends HTTPService {
         return true;
     }
 
+    public static function record($appID, $accessToken, $session, $notifyURL, $msg = '', $maxDuration = 120) {
+        // prepare HTTP POST variables
+        $fields = array(
+                            'app_id' => urlencode($appID),
+                            'access_token' => urlencode($accessToken),
+                            'session' => urlencode($session),
+                            'notify_url' => urlencode($notifyURL),
+                            'max_duration' => urlencode(strval($maxDuration))
+        );
+
+        if($msg != '')
+            $fields['msg'] = urlencode($msg);
+
+        if($tag != '')
+            $fields['tag'] = urlencode($tag);
+
+        // do the actual post to Hoiio servers
+        $result = self::doHoiioPost(self::I_RECORD, $fields);
+
+        return true;
+    }
+
     public static function transfer($appID, $accessToken, $session, $to, $notifyURL = '', $msg = '', $callerID = '', $tag = '') {
         // prepare HTTP POST variables
         $fields = array(
@@ -148,6 +172,7 @@ class IVRService extends HTTPService {
     public static function parseIVRNotify($post_var) {
         $dialStatus = array_key_exists('dial_status', $post_var) ? $post_var['dial_status'] : '';
         $digits = array_key_exists('digits', $post_var) ? $post_var['digits'] : '';
+        $recordURL = array_key_exists('record_url', $post_var) ? $post_var['record_url'] : '';
         $transferStatus = array_key_exists('transfer_status', $post_var) ? $post_var['transfer_status'] : '';
         $from = array_key_exists('from', $post_var) ? $post_var['from'] : '';
         $to = array_key_exists('to', $post_var) ? $post_var['to'] : '';
@@ -166,6 +191,7 @@ class IVRService extends HTTPService {
                                        $post_var['txn_ref'],
                                        $dialStatus,
                                        $digits,
+                                       $$recordURL,
                                        $transferStatus,
                                        $from,
                                        $to,

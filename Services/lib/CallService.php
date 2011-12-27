@@ -4,9 +4,11 @@
  * CallService class provides acccess to voice-related Hoiio API.
  * Currently, includes:
  *  - Make a 2-way callback
+ *  - Make conference calls
  *  - Get call rates
  *  - Get call history
  *  - Get call status
+ *  - Hangup a call
  *  - Parse call notifications
  */
 class CallService extends HTTPService {
