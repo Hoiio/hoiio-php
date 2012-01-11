@@ -1,11 +1,11 @@
 
-php-hoiio 
+hoiio-php 
 ----------------------
 
-php-hoiio is a PHP SDK for Hoiio's Voice and SMS API. It encapsulates the REST 
+hoiio-php is a PHP SDK for Hoiio's Voice and SMS API. It encapsulates the REST 
 communications and let developers use the API via a few simple classes.
 
-Currently, php-hoiio supports the Call, SMS, Account, Hoiio Number and IVR APIs.
+Currently, hoiio-php supports the Call, SMS, Account, Hoiio Number and IVR APIs.
 
 
 Requirements
@@ -18,7 +18,7 @@ Requirements
 Installation
 ----------------------
 Just download and extract the package into your project folder. You should be
-able to see a php-hoiio/ folder.
+able to see a hoiio-php/ folder.
 
 
 Usage
@@ -27,14 +27,14 @@ You will be able to access all of Hoiio's API via the HoiioService class.
 Check the docs for details.
 
 // E.g. Sending SMS
-require 'php-hoiio/Services/HoiioService.php';
+require 'hoiio-php/Services/HoiioService.php';
 
 $h = new HoiioService("myAppID", "myAccessToken");
 $txnRef = $h->sms("+651111111", "hello world");
 print("SMS sent successfully. TxnRef: $txnRef\n");
 
 // E.g. Building IVR
-require 'php-hoiio/Services/HoiioService.php';
+require 'hoiio-php/Services/HoiioService.php';
 
 $h = new HoiioService("myAppID", "myAccessToken");
 $notify = $h->parseIVRNotify($_POST);
