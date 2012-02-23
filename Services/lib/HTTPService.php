@@ -18,7 +18,6 @@ class HTTPService {
         $fields_string .= $key . '=' . $value . '&';
 
         $fields_string = rtrim($fields_string,'&');
-        print_r($fields_string);
 
         // initialize cURL
         $ch = curl_init();
