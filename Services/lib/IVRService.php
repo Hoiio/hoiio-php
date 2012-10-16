@@ -116,7 +116,7 @@ class IVRService extends HTTPService {
         return true;
     }
 
-    public static function transfer($appID, $accessToken, $session, $to, $notifyURL = '', $msg = '', $callerID = '', $tag = '') {
+    public static function transfer($appID, $accessToken, $session, $to, $notifyURL = '', $msg = '', $callerID = '', $tag = '', $onFailure = '') {
         // prepare HTTP POST variables
         $fields = array(
                             'app_id' => urlencode($appID),
@@ -137,6 +137,9 @@ class IVRService extends HTTPService {
         if($notifyURL != '')
             $fields['notify_url'] = urlencode($notifyURL);
 
+        if($onFailure != '')
+            $fields['on_failure'] = urlencode($onFailure);
+        
         // do the actual post to Hoiio servers
         $result = self::doHoiioPost(self::I_TRANSFER, $fields);
 

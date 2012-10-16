@@ -278,12 +278,13 @@ class HoiioService {
      * @param string $msg       The voice message you want to play before transferring
      * @param string $callerID  The Caller ID you want to use when transferring the call
      * @param string $tag       Your own reference ID
+     * @param string $onFailure Set to 'continue' if you want to handle when transfer failed. Else it will hangup.
      *
      * @return bool/string      Always return true (when transferring to E.164 number). Return Room ID when transferring to conference room.
      * @throws HoiioException   Error sending IVR Transfer to Hoiio API
      */
-    public function ivrTransfer($session, $to, $notifyURL = '', $msg = '', $callerID = '', $tag = '') {
-        return IVRService::transfer($this->appID, $this->accessToken, $session, $to, $notifyURL, $msg, $callerID, $tag);
+    public function ivrTransfer($session, $to, $notifyURL = '', $msg = '', $callerID = '', $tag = '', $onFailure = '') {
+        return IVRService::transfer($this->appID, $this->accessToken, $session, $to, $notifyURL, $msg, $callerID, $tag, $onFailure);
     }
 
     /**
