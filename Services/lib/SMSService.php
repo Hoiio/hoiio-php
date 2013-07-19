@@ -4,6 +4,7 @@
  * SMSService class provides acccess to SMS-related Hoiio API.
  * Currently, includes:
  *  - Send SMS
+ *  - Send Bulk SMS
  *  - Get SMS rates
  *  - Get SMS history
  *  - Get SMS status
@@ -12,6 +13,7 @@
 class SMSService extends HTTPService {
     /* endpoints for SMS APIs */
     const H_SMS         = 'https://secure.hoiio.com/open/sms/send';
+    const H_SMS_BULK    = 'https://secure.hoiio.com/open/sms/bulk_send';
     const H_SMS_HIST    = 'https://secure.hoiio.com/open/sms/get_history';
     const H_SMS_RATE    = 'https://secure.hoiio.com/open/sms/get_rate';
     const H_SMS_STATUS  = 'https://secure.hoiio.com/open/sms/query_status';
@@ -38,6 +40,39 @@ class SMSService extends HTTPService {
         $result = self::doHoiioPost(self::H_SMS, $fields);
 
         return $result->{'txn_ref'};
+    }
+    
+    public static function bulksms($appID, $accessToken, $to, $msg, $senderID = '', $tag = '', $notifyURL = '') {
+        // prepare HTTP POST variables
+        $fields = array(
+                            'app_id' => urlencode($appID),
+                            'access_token' => urlencode($accessToken),
+                            'msg' => urlencode($msg)
+        );
+        
+        if ($to != '') {
+            $toArray = explode(',', $to);
+            foreach($toArray as $value){
+                $value = urlencode($value);
+            }
+            unset($value);
+            $toString = implode(',', $toArray);
+            $fields['dest'] = $toString;
+        }
+
+        if($senderID != '')
+            $fields['sender_name'] = urlencode($senderID);
+
+        if($tag != '')
+            $fields['tag'] = urlencode($tag);
+
+        if($notifyURL != '')
+            $fields['notify_url'] = urlencode($notifyURL);
+
+        // do the actual post to Hoiio servers
+        $result = self::doHoiioPost(self::H_SMS_BULK, $fields);
+
+        return $result->{'bulk_txn_ref'};
     }
 
     public static function getRate($appID, $accessToken, $to, $msg) {
