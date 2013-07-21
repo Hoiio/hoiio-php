@@ -47,18 +47,9 @@ class SMSService extends HTTPService {
         $fields = array(
                             'app_id' => urlencode($appID),
                             'access_token' => urlencode($accessToken),
-                            'msg' => urlencode($msg)
+                            'msg' => urlencode($msg),
+                            'dest' => urlencode($to)
         );
-        
-        if ($to != '') {
-            $toArray = explode(',', $to);
-            foreach($toArray as $value){
-                $value = urlencode($value);
-            }
-            unset($value);
-            $toString = implode(',', $toArray);
-            $fields['dest'] = $toString;
-        }
 
         if($senderID != '')
             $fields['sender_name'] = urlencode($senderID);
