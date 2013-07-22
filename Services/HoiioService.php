@@ -141,6 +141,22 @@ class HoiioService {
     public function sms($to, $msg, $senderID = '', $tag = '', $notifyURL = '') {
         return SMSService::sms($this->appID, $this->accessToken, $to, $msg, $senderID, $tag, $notifyURL);
     }
+    
+    /**
+     * Use this to send a Bulk SMS.
+     *
+     * @param string $to        List of phone numbers separated by commas. Max 1000 numbers. Numbers should start with a "+" and country code
+     * @param string $msg       SMS message
+     * @param string $senderID  Sender ID (you need to request from Hoiio for this feature)
+     * @param string $tag       Your own reference ID
+     * @param string $notifyURL Your URL to recieve call notification
+     *
+     * @return string           Transaction Reference
+     * @throws HoiioException   Error sending SMS to Hoiio API
+     */
+    public function bulksms($to, $msg, $senderID = '', $tag = '', $notifyURL = '') {
+        return SMSService::bulksms($this->appID, $this->accessToken, $to, $msg, $senderID, $tag, $notifyURL);
+    }
 
     /**
      * Use this to query the cost of sending a SMS before actually sending it.
