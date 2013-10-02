@@ -32,7 +32,7 @@ class IVRService extends HTTPService {
             $fields['msg'] = urlencode($msg);
 
         if($callerID != '')
-            $fields['callerID'] = urlencode($callerID);
+            $fields['caller_id'] = urlencode($callerID);
 
         if($tag != '')
             $fields['tag'] = urlencode($tag);
@@ -129,7 +129,7 @@ class IVRService extends HTTPService {
             $fields['msg'] = urlencode($msg);
 
         if($callerID != '')
-            $fields['callerID'] = urlencode($callerID);
+            $fields['caller_id'] = urlencode($callerID);
 
         if($tag != '')
             $fields['tag'] = urlencode($tag);
