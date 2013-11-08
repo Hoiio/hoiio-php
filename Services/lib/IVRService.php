@@ -123,7 +123,7 @@ class IVRService extends HTTPService {
                             'app_id' => urlencode($appID),
                             'access_token' => urlencode($accessToken),
                             'session' => urlencode($session),
-                            'notify_url' => urlencode($notifyURL))
+                            'notify_url' => urlencode($notifyURL)
         );
 
         if($msg != '')
