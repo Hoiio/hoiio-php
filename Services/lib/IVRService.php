@@ -17,6 +17,7 @@ class IVRService extends HTTPService {
     const I_PLAY        = 'https://secure.hoiio.com/open/ivr/middle/play';
     const I_GATHER      = 'https://secure.hoiio.com/open/ivr/middle/gather';
     const I_RECORD      = 'https://secure.hoiio.com/open/ivr/middle/record';
+    const I_MONITOR     = 'https://secure.hoiio.com/open/ivr/middle/monitor';
     const I_TRANSFER    = 'https://secure.hoiio.com/open/ivr/end/transfer';
     const I_HANGUP      = 'https://secure.hoiio.com/open/ivr/end/hangup';
 
@@ -112,6 +113,27 @@ class IVRService extends HTTPService {
 
         // do the actual post to Hoiio servers
         $result = self::doHoiioPost(self::I_RECORD, $fields);
+
+        return true;
+    }
+
+    public static function monitor($appID, $accessToken, $session, $notifyURL, $msg = '', $tag = '') {
+        // prepare HTTP POST variables
+        $fields = array(
+                            'app_id' => urlencode($appID),
+                            'access_token' => urlencode($accessToken),
+                            'session' => urlencode($session),
+                            'notify_url' => urlencode($notifyURL))
+        );
+
+        if($msg != '')
+            $fields['msg'] = urlencode($msg);
+
+        if($tag != '')
+            $fields['tag'] = urlencode($tag);
+
+        // do the actual post to Hoiio servers
+        $result = self::doHoiioPost(self::I_MONITOR, $fields);
 
         return true;
     }

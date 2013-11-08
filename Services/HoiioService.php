@@ -286,6 +286,21 @@ class HoiioService {
     }
 
     /**
+     * Use this to monitor the conversation
+     *
+     * @param string $session       Session ID for this IVR
+     * @param string $notifyURL     Your URL to recieve IVR notification
+     * @param string $msg           The voice message you want to play
+     * @param string $tag           Your own reference ID
+     *
+     * @return bool             Always return true
+     * @throws HoiioException   Error sending IVR Record to Hoiio API
+     */
+    public function ivrMonitor($session, $notifyURL, $msg = '', $tag = '') {
+        return IVRService::monitor($this->appID, $this->accessToken, $session, $notifyURL, $msg, $tag);
+    }
+
+    /**
      * Use this to transfer a current IVR session to another number or a conference room.
      *
      * @param string $session   Session ID for this IVR
