@@ -1,8 +1,8 @@
 
-hoiio-php 
+hoiio-php
 ----------------------
 
-hoiio-php is a PHP SDK for Hoiio's Voice and SMS API. It encapsulates the REST 
+hoiio-php is a PHP SDK for Hoiio's Voice and SMS API. It encapsulates the REST
 communications and let developers use the API via a few simple classes.
 
 Currently, hoiio-php supports the Call, SMS, Account, Hoiio Number and IVR APIs.
@@ -20,10 +20,18 @@ Installation
 Just download and extract the package into your project folder. You should be
 able to see a hoiio-php/ folder.
 
+Or if you are using [composer](https://getcomposer.org), you can add this to your composer.json
+
+	{
+	    "require": {
+	        "hoiio/hoiio-php": "*"
+	    }
+	}
+
 
 Usage
 ----------------------
-You will be able to access all of Hoiio's API via the HoiioService class. 
+You will be able to access all of Hoiio's API via the HoiioService class.
 Check the docs for details.
 
 // E.g. Sending SMS

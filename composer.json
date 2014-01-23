@@ -1,0 +1,18 @@
+{
+    "name": "hoiio/hoiio-php",
+    "type": "library",
+    "description": "Hoiio API provides telephony services such as call, SMS and interactive voice responses (IVR). This SDK makes using the API a breeze.",
+    "keywords": ["sms","call","conference","ivr","telephony"],
+    "homepage": "http://developer.hoiio.com/",
+    "license": "MIT",
+    "require": {
+        "php": ">=5.1.0"
+    },
+    "suggest": {
+        "ext-curl": "PHP Curl",
+        "ext-json": "PHP JSON"
+    },
+    "autoload": {
+        "psr-0": {"hoiio": "Services/"}
+    }
+}
