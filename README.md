@@ -58,12 +58,12 @@ This project is under [MIT License](http://en.wikipedia.org/wiki/MIT_License).
 See LICENSE file for details.
 
 
-Contacts
+Contact Us
 ----------------------
 If you have any questions, please feel free to contact us:
 
 - [@hoiio](https://twitter.com/hoiio)
-- [Google Group(https://groups.google.com/forum/#!forum/hoiio-developers)
-- [Facebook Page][http://www.facebook.com/Hoiio]
+- [Google Group](https://groups.google.com/forum/#!forum/hoiio-developers)
+- [Facebook Page](http://www.facebook.com/Hoiio)
 - [Hoiio Developer Blog](http://devblog.hoiio.com/)
 
