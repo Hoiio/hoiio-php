@@ -34,27 +34,27 @@ Usage
 You will be able to access all of Hoiio's API via the HoiioService class.
 Check the docs for details.
 
-// E.g. Sending SMS
-require 'hoiio-php/Services/HoiioService.php';
+	// E.g. Sending SMS
+	require 'hoiio-php/Services/HoiioService.php';
 
-$h = new HoiioService("myAppID", "myAccessToken");
-$txnRef = $h->sms("+651111111", "hello world");
-print("SMS sent successfully. TxnRef: $txnRef\n");
+	$h = new HoiioService("myAppID", "myAccessToken");
+	$txnRef = $h->sms("+651111111", "hello world");
+	print("SMS sent successfully. TxnRef: $txnRef\n");
 
-// E.g. Building IVR
-require 'hoiio-php/Services/HoiioService.php';
+	// E.g. Building IVR
+	require 'hoiio-php/Services/HoiioService.php';
 
-$h = new HoiioService("myAppID", "myAccessToken");
-$notify = $h->parseIVRNotify($_POST);
-$session = $notify->getSession();
-$key = $notify->getDigits();
+	$h = new HoiioService("myAppID", "myAccessToken");
+	$notify = $h->parseIVRNotify($_POST);
+	$session = $notify->getSession();
+	$key = $notify->getDigits();
 
-$h->ivrPlay($session, '', "You just pressed $key.");
+	$h->ivrPlay($session, '', "You just pressed $key.");
 
 
 License
 ----------------------
-This project is under MIT License (http://en.wikipedia.org/wiki/MIT_License).
+This project is under [MIT License](http://en.wikipedia.org/wiki/MIT_License).
 See LICENSE file for details.
 
 
@@ -62,8 +62,8 @@ Contacts
 ----------------------
 If you have any questions, please feel free to contact us:
 
-Twitter:        @hoiiotweets
-Google Groups:  https://groups.google.com/forum/#!forum/hoiio-developers
-Facebook:       http://www.facebook.com/Hoiio
-Blog:           http://devblog.hoiio.com/
+- [@hoiio](https://twitter.com/hoiio)
+- [Google Group(https://groups.google.com/forum/#!forum/hoiio-developers)
+- [Facebook Page][http://www.facebook.com/Hoiio]
+- [Hoiio Developer Blog](http://devblog.hoiio.com/)
 
